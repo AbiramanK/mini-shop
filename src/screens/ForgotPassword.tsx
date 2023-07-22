@@ -1,8 +1,10 @@
-import {Text} from 'react-native';
+import React from 'react';
+
+import {Text} from './../components';
 
 export interface ForgotPasswordProps {}
 
-function ForgotPassword(props: ForgotPasswordProps) {
+function ForgotPassword(_: ForgotPasswordProps) {
   return <Text>Forgot Password</Text>;
 }
 
