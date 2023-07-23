@@ -5,24 +5,46 @@ import {StackScreenProps} from '@react-navigation/stack';
 import {Container, Header, PetCard, PetsList} from '../components';
 import {getPets} from '../api';
 import {ProductStackParamList} from '../types/navigation';
+import {DEFAULT_PAGINATION_CURSOR} from '../../constants';
 
 export interface ProductProps
   extends StackScreenProps<ProductStackParamList, 'ProductHome'> {}
 
 function Product(props: ProductProps) {
   const [pets, setPets] = useState<Array<string>>([]);
+  const [cursor, setCursor] = useState<number>(DEFAULT_PAGINATION_CURSOR);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     loadInitialData();
   }, []);
 
+  function startLoading() {
+    setIsLoading(true);
+  }
+
+  function stopLoading() {
+    setIsLoading(false);
+  }
+
   async function loadInitialData() {
-    const dogs = await getPets();
+    startLoading();
+    const dogs = await getPets(cursor);
     setPets(dogs);
+    stopLoading();
   }
 
   function goToPetDetailPage(pet: string) {
     props?.navigation?.navigate('ProductDetail', {pet});
+  }
+
+  async function fetchMore() {
+    const newCursor =
+      cursor + DEFAULT_PAGINATION_CURSOR - DEFAULT_PAGINATION_CURSOR;
+    setCursor(newCursor);
+    const dogs = await getPets(newCursor);
+
+    setPets(value => [...value, ...dogs]);
   }
 
   return (
@@ -39,6 +61,10 @@ function Product(props: ProductProps) {
           />
         )}
         keyExtractor={(pet: string) => pet}
+        onEndReachedThreshold={0.5}
+        onEndReached={fetchMore}
+        refreshing={isLoading}
+        onRefresh={loadInitialData}
       />
     </Container>
   );

@@ -1,8 +1,10 @@
 import {PETS_BASE_URL} from '../constants';
 
-async function getPets() {
+async function getPets(cursor: number) {
   try {
-    const response = await fetch(`${PETS_BASE_URL}/breed/hound/images`);
+    const response = await fetch(
+      `${PETS_BASE_URL}/breed/hound/images/random/${cursor}`,
+    );
     if (response?.ok) {
       const pets = await response?.json();
       if (pets?.status === 'success') {
