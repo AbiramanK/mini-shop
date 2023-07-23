@@ -11,22 +11,12 @@ const RootStack = createStackNavigator<RootStackParamList>();
 function RootNavigation() {
   return (
     <NavigationContainer>
-      <RootStack.Navigator initialRouteName="Login">
-        <RootStack.Screen
-          name="Login"
-          component={Login}
-          options={{
-            headerShown: false,
-          }}
-        />
+      <RootStack.Navigator
+        initialRouteName="Login"
+        screenOptions={{headerShown: false}}>
+        <RootStack.Screen name="Login" component={Login} />
         <RootStack.Screen name="ForgotPassword" component={ForgotPassword} />
-        <RootStack.Screen
-          name="Home"
-          component={HomeNavigation}
-          options={{
-            headerShown: false,
-          }}
-        />
+        <RootStack.Screen name="Home" component={HomeNavigation} />
       </RootStack.Navigator>
     </NavigationContainer>
   );
