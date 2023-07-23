@@ -5,12 +5,15 @@ import {
   TextStyle,
   TouchableOpacity,
   ViewStyle,
+  Appearance,
 } from 'react-native';
 import Ionicon from 'react-native-vector-icons/Ionicons';
 
 import Text from './Text';
 import Container from './Container';
 import {WHITE} from '../colors';
+
+const theme = Appearance?.getColorScheme();
 
 export interface HeaderProps {
   style?: StyleProp<TextStyle>;
@@ -49,7 +52,8 @@ const styles = StyleSheet.create({
     columnGap: 25,
   },
   iconContainer: {
-    backgroundColor: 'rgba(255, 255, 255, 0.3)',
+    backgroundColor:
+      theme === 'dark' ? 'rgba(255, 255, 255, 0.3)' : 'rgba(0, 0, 0, 0.3)',
     padding: 8,
     borderRadius: 100,
   },
