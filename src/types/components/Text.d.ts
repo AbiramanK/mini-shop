@@ -1,1 +1,8 @@
-export type TextVariantOptions = 'title' | 'label' | 'button' | 'helper';
+export type TextVariantOptions =
+  | 'title'
+  | 'subtitle'
+  | 'label'
+  | 'button'
+  | 'helper'
+  | 'text'
+  | 'paragraph';

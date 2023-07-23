@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 
 import {TextVariantOptions} from '../types/components/Text';
+import {DARK, HELPER_TEXT_DARK, HELPER_TEXT_LIGHT, LIGHT} from '../colors';
 
 const theme = Appearance?.getColorScheme();
 
@@ -31,10 +32,14 @@ function Text(props: PropsWithChildren<TextProps>) {
 
 const styles = StyleSheet.create({
   defaultColor: {
-    color: theme === 'dark' ? '#FFFFFF' : '#000000',
+    color: theme === 'dark' ? LIGHT : DARK,
   },
   title: {
     fontSize: 32,
+    fontWeight: 'bold',
+  },
+  subtitle: {
+    fontSize: 26,
     fontWeight: 'bold',
   },
   label: {
@@ -49,8 +54,12 @@ const styles = StyleSheet.create({
   },
   helper: {
     fontSize: 18,
-    color: theme === 'dark' ? '#90EE90' : '#00FF00',
+    color: theme === 'dark' ? HELPER_TEXT_DARK : HELPER_TEXT_LIGHT,
     fontWeight: 'normal',
+  },
+  paragraph: {
+    fontSize: 20,
+    marginVertical: 4,
   },
 });
 

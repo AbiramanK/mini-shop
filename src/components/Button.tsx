@@ -11,6 +11,7 @@ import {
 
 import Text from './Text';
 import {ButtonVariantOptions} from '../types/components/Button';
+import {DARK, LIGHT} from '../colors';
 
 const theme = Appearance?.getColorScheme();
 
@@ -57,12 +58,12 @@ const styles = StyleSheet.create({
   contianer: {
     paddingVertical: 12,
     borderRadius: 8,
-    backgroundColor: theme === 'dark' ? '#FFFFFF' : '#000000',
+    backgroundColor: theme === 'dark' ? LIGHT : DARK,
     alignItems: 'center',
     justifyContent: 'center',
   },
   title: {
-    color: theme === 'dark' ? '#000000' : '#FFFFFF',
+    color: theme === 'dark' ? DARK : LIGHT,
     fontWeight: 'bold',
   },
   link: {},

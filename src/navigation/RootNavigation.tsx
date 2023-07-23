@@ -4,6 +4,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import {RootStackParamList} from '../types/navigation';
 import {ForgotPassword, Login} from '../screens';
+import HomeNavigation from './HomeNavigation';
 
 const RootStack = createStackNavigator<RootStackParamList>();
 
@@ -19,6 +20,13 @@ function RootNavigation() {
           }}
         />
         <RootStack.Screen name="ForgotPassword" component={ForgotPassword} />
+        <RootStack.Screen
+          name="Home"
+          component={HomeNavigation}
+          options={{
+            headerShown: false,
+          }}
+        />
       </RootStack.Navigator>
     </NavigationContainer>
   );

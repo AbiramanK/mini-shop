@@ -12,6 +12,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import Text from './Text';
 import Container from './Container';
+import {DARK, LIGHT} from '../colors';
 
 const theme = Appearance?.getColorScheme();
 
@@ -79,7 +80,7 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderWidth: 0.8,
     borderRadius: 5,
-    borderColor: theme === 'dark' ? '#FFFFFF' : '#000000',
+    borderColor: theme === 'dark' ? LIGHT : DARK,
   },
   secureContainer: {
     position: 'absolute',

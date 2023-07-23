@@ -1,5 +1,6 @@
 import React, {PropsWithChildren} from 'react';
 import {View, Appearance, StyleSheet, StyleProp, ViewStyle} from 'react-native';
+import {DARK, LIGHT} from '../colors';
 
 const theme = Appearance?.getColorScheme();
 
@@ -16,7 +17,7 @@ function Container(props: PropsWithChildren<ContianerProps>) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: theme === 'dark' ? '#000000' : '#FFFFFF',
+    backgroundColor: theme === 'dark' ? DARK : LIGHT,
   },
 });
 

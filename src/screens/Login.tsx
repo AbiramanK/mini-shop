@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {StyleSheet, Image} from 'react-native';
 import {StackScreenProps} from '@react-navigation/stack';
+import {CommonActions} from '@react-navigation/native';
 
 import {RootStackParamList} from '../types/navigation';
 import {
@@ -32,7 +33,14 @@ function Login(props: LoginProps) {
     props?.navigation?.navigate('ForgotPassword');
   }
 
-  function onPressLogin() {}
+  function onPressLogin() {
+    props?.navigation?.dispatch(
+      CommonActions?.reset({
+        index: 0,
+        routes: [{name: 'Home'}],
+      }),
+    );
+  }
 
   return (
     <Container style={styles?.container}>

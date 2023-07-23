@@ -1,6 +1,23 @@
 type RootStackParamList = {
   Login: undefined;
   ForgotPassword: undefined;
+  Home: HomeBottomTabParamList;
 };
 
-export {type RootStackParamList};
+type ProductStackParamList = {
+  ProductHome: undefined;
+  ProductDetail: {
+    pet: string;
+  };
+};
+
+type HomeBottomTabParamList = {
+  About: undefined;
+  Product: ProductStackParamList;
+};
+
+export {
+  type RootStackParamList,
+  type HomeBottomTabParamList,
+  type ProductStackParamList,
+};
