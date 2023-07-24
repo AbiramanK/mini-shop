@@ -61,6 +61,11 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginVertical: 4,
   },
+  error: {
+    fontSize: 16,
+    color: '#FF9494',
+    fontWeight: 'normal',
+  },
 });
 
 export default Text;

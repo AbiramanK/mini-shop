@@ -5,4 +5,5 @@ export type TextVariantOptions =
   | 'button'
   | 'helper'
   | 'text'
-  | 'paragraph';
+  | 'paragraph'
+  | 'error';

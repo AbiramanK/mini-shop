@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {StyleSheet, Image} from 'react-native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {CommonActions} from '@react-navigation/native';
+import {useFormik} from 'formik';
 
 import {RootStackParamList} from '../types/navigation';
 import {
@@ -13,27 +14,35 @@ import {
   Footer,
 } from '../components';
 import {REACT_NATIVE_APP_LOGIN_LOGO_IMAGE_URL} from '../constants';
+import {LoginFormValidationSchema} from '../ValidationSchema';
+import {showToast} from '../utilities';
+
+export interface LoginFormInterface {
+  email: string;
+  password: string;
+}
 
 export interface LoginProps
   extends StackScreenProps<RootStackParamList, 'Login'> {}
 
 function Login(props: LoginProps) {
-  const [email, setEmail] = useState<string>();
-  const [password, setPassword] = useState<string>();
-
-  function onChangeEmail(value: string) {
-    setEmail(value);
-  }
-
-  function onChangePassword(value: string) {
-    setPassword(value);
-  }
-
   function onPressForgotPassword() {
     props?.navigation?.navigate('ForgotPassword');
   }
 
-  function onPressLogin() {
+  function login(form: LoginFormInterface) {
+    if (form?.email === 'admin@minishop.com' && form?.password === '12345678') {
+      loginSuccess();
+    } else {
+      showToast({
+        type: 'error',
+        text1: 'Login Failed',
+        text2: 'Email / Password incorrect',
+      });
+    }
+  }
+
+  function loginSuccess() {
     props?.navigation?.dispatch(
       CommonActions?.reset({
         index: 0,
@@ -41,6 +50,15 @@ function Login(props: LoginProps) {
       }),
     );
   }
+
+  const {handleChange, handleBlur, handleSubmit, values, errors, touched} =
+    useFormik({
+      initialValues: {email: '', password: ''},
+      validationSchema: LoginFormValidationSchema,
+      onSubmit: form => {
+        login(form);
+      },
+    });
 
   return (
     <Container style={styles?.container}>
@@ -56,18 +74,30 @@ function Login(props: LoginProps) {
         </Container>
         <Container style={styles?.inputsContainer}>
           <TextInput
-            value={email}
-            onChangeText={onChangeEmail}
+            id="email"
+            value={values?.email}
+            onChangeText={handleChange('email')}
+            onBlur={handleBlur('email')}
             keyboardType="email-address"
             placeholder="Email"
             label="Email"
+            errorMessage={
+              errors?.email && touched?.email ? errors?.email : undefined
+            }
           />
           <TextInput
-            value={password}
-            onChangeText={onChangePassword}
+            id="password"
+            value={values?.password}
+            onChangeText={handleChange('password')}
+            onBlur={handleBlur('password')}
             placeholder="Password"
             label="Password"
             secureTextEntry
+            errorMessage={
+              errors?.password && touched?.password
+                ? errors?.password
+                : undefined
+            }
           />
         </Container>
         <Button
@@ -76,7 +106,7 @@ function Login(props: LoginProps) {
           autoCapitalization={false}>
           Forgot Password?
         </Button>
-        <Button onPress={onPressLogin} autoCapitalization={false}>
+        <Button onPress={handleSubmit as any} autoCapitalization={false}>
           Login
         </Button>
         <Footer containerStyle={styles?.footerContainer} />
@@ -107,6 +137,9 @@ const styles = StyleSheet.create({
   },
   footerContainer: {
     paddingVertical: 20,
+  },
+  formikContainer: {
+    rowGap: 20,
   },
 });
 
