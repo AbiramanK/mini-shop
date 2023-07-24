@@ -3,7 +3,7 @@ import {StyleProp, StyleSheet, TextStyle, ViewStyle} from 'react-native';
 
 import Container from './Container';
 import Text from './Text';
-import {REACT_NATIVE_APP_COPYRIGHT_MESSAGE} from '../../constants';
+import {REACT_NATIVE_APP_COPYRIGHT_MESSAGE} from '../constants';
 
 export interface FooterProps {
   containerStyle?: StyleProp<ViewStyle>;

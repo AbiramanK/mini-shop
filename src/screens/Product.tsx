@@ -5,7 +5,7 @@ import {StackScreenProps} from '@react-navigation/stack';
 import {Container, Header, PetCard, PetsList} from '../components';
 import {getPets} from '../api';
 import {ProductStackParamList} from '../types/navigation';
-import {DEFAULT_PAGINATION_CURSOR} from '../../constants';
+import {DEFAULT_PAGINATION_CURSOR} from '../constants';
 
 export interface ProductProps
   extends StackScreenProps<ProductStackParamList, 'ProductHome'> {}

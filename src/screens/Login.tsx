@@ -12,7 +12,7 @@ import {
   Content,
   Footer,
 } from '../components';
-import {REACT_NATIVE_APP_LOGIN_LOGO_IMAGE_URL} from '../../constants';
+import {REACT_NATIVE_APP_LOGIN_LOGO_IMAGE_URL} from '../constants';
 
 export interface LoginProps
   extends StackScreenProps<RootStackParamList, 'Login'> {}

@@ -1,4 +1,4 @@
-import {PETS_BASE_URL} from '../constants';
+import {PETS_BASE_URL} from './constants';
 
 async function getPets(cursor: number) {
   try {

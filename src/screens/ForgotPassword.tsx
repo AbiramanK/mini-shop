@@ -11,7 +11,7 @@ import {
   Footer,
   Header,
 } from '../components';
-import {REACT_NATIVE_APP_LOGIN_LOGO_IMAGE_URL} from '../../constants';
+import {REACT_NATIVE_APP_LOGIN_LOGO_IMAGE_URL} from '../constants';
 
 export interface ForgotPasswordProps
   extends StackScreenProps<RootStackParamList, 'ForgotPassword'> {}
