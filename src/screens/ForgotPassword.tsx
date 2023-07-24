@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {StyleSheet, Image} from 'react-native';
 import {StackScreenProps} from '@react-navigation/stack';
+import {useFormik} from 'formik';
 
 import {RootStackParamList} from '../types/navigation';
 import {
@@ -12,28 +13,42 @@ import {
   Header,
 } from '../components';
 import {REACT_NATIVE_APP_LOGIN_LOGO_IMAGE_URL} from '../constants';
+import {ForgotPasswordFormValidationSchema} from '../ValidationSchema';
+import {showToast} from '../utilities';
+
+export interface ForgotPasswordFormInterface {
+  email: string;
+}
 
 export interface ForgotPasswordProps
   extends StackScreenProps<RootStackParamList, 'ForgotPassword'> {}
 
 function ForgotPassword(props: ForgotPasswordProps) {
-  const [email, setEmail] = useState<string>();
-
-  function onChangeEmail(value: string) {
-    setEmail(value);
-  }
-
   function onPressLogin() {
     onPressGoBack();
   }
 
-  function onPressSubmit() {
+  function onPressSubmit(_: ForgotPasswordFormInterface) {
+    showToast({
+      type: 'success',
+      text1: 'Reset Pasword',
+      text2: 'Reset password link sent',
+    });
     onPressGoBack();
   }
 
   function onPressGoBack() {
     props?.navigation?.goBack();
   }
+
+  const {handleChange, handleBlur, handleSubmit, values, errors, touched} =
+    useFormik({
+      initialValues: {email: ''},
+      validationSchema: ForgotPasswordFormValidationSchema,
+      onSubmit(form) {
+        onPressSubmit(form);
+      },
+    });
 
   return (
     <Container style={styles?.container}>
@@ -51,14 +66,19 @@ function ForgotPassword(props: ForgotPasswordProps) {
         </Container>
         <Container style={styles?.inputsContainer}>
           <TextInput
-            value={email}
-            onChangeText={onChangeEmail}
+            id="email"
+            value={values?.email}
+            onChangeText={handleChange('email')}
+            onBlur={handleBlur('email')}
             keyboardType="email-address"
             placeholder="Email"
             label="Email"
+            errorMessage={
+              errors?.email && touched?.email ? errors?.email : undefined
+            }
           />
         </Container>
-        <Button onPress={onPressSubmit} autoCapitalization={false}>
+        <Button onPress={handleSubmit as any} autoCapitalization={false}>
           Submit
         </Button>
         <Button

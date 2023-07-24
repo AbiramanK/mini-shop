@@ -9,4 +9,10 @@ const LoginFormValidationSchema = Yup?.object({
     .required('Password is required'),
 });
 
-export {LoginFormValidationSchema};
+const ForgotPasswordFormValidationSchema = Yup?.object({
+  email: Yup.string()
+    .email('Enter a valid email')
+    .required('Email is required'),
+});
+
+export {LoginFormValidationSchema, ForgotPasswordFormValidationSchema};
